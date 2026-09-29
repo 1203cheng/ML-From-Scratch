@@ -1,0 +1,31 @@
+# Data files
+*.idx3-ubyte
+*.idx1-ubyte
+*.csv
+*.pkl
+*.pth
+Yale_Face_Database/
+
+# Build artifacts
+a.out
+*.o
+*.exe
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+*.pages
+
+# IDE
+.vscode/
+.idea/
+
+# Generated output (curated results live in */docs/)
+*.gif
+!*/docs/*.gif
+result.csv
+/*/main
