@@ -4,7 +4,9 @@ Fits a polynomial to 2D data points using three different solvers, all built on 
 
 ## Problem
 
-Given data points `(x, y)`, the number of polynomial bases `n`, and a regularization weight `λ`, find weights `w` for `f(x) = w₀ + w₁x + … + wₙ₋₁xⁿ⁻¹`.
+Given data points $(x, y)$, the number of polynomial bases $n$, and a regularization weight $\lambda$, find weights $w$ for
+
+$$f(x) = w_0 + w_1 x + \dots + w_{n-1} x^{n-1}$$
 
 ## Approach
 
@@ -16,9 +18,9 @@ Supports addition, subtraction, scalar and matrix multiplication (`@`), transpos
 
 | Solver | Objective | Update |
 |--------|-----------|--------|
-| **Regularized LSE** (ridge) | `‖Aw − y‖² + λ‖w‖²` | Closed form: `w = (AᵀA + λI)⁻¹Aᵀy` |
-| **Steepest Descent** (LASSO) | `‖Aw − y‖² + λ‖w‖₁` | Subgradient `2AᵀAw − 2Aᵀy + λ·sign(w)`, fixed learning rate |
-| **Newton's Method** | `‖Aw − y‖²` | `w ← w − H⁻¹∇`, with Hessian `H = 2AᵀA` |
+| **Regularized LSE** (ridge) | $\lVert Aw - y \rVert^2 + \lambda \lVert w \rVert^2$ | Closed form: $w = (A^\top A + \lambda I)^{-1} A^\top y$ |
+| **Steepest Descent** (LASSO) | $\lVert Aw - y \rVert^2 + \lambda \lVert w \rVert_1$ | Subgradient $2A^\top A w - 2A^\top y + \lambda \operatorname{sign}(w)$, fixed learning rate |
+| **Newton's Method** | $\lVert Aw - y \rVert^2$ | $w \leftarrow w - H^{-1} \nabla$, with Hessian $H = 2A^\top A$ |
 
 Each solver prints the fitted polynomial and its total squared error, then plots the curve against the data.
 

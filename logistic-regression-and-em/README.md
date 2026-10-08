@@ -8,9 +8,9 @@ Separates two classes of 2D points drawn from Gaussians. The user enters the mea
 
 ### Approach
 
-- **Gradient descent**: Follows the log-likelihood gradient `Xᵀ(t − σ(Xw))`.
-- **Newton's method**: Scales the gradient by the inverse Hessian `H = XᵀDX`, where `D = diag(σ′(Xw))`. If `H` is singular, it falls back to a plain gradient step.
-- Both methods add a momentum term to the update and stop when the relative change in `w` is small enough.
+- **Gradient descent**: Follows the log-likelihood gradient $X^\top \left( t - \sigma(Xw) \right)$.
+- **Newton's method**: Scales the gradient by the inverse Hessian $H = X^\top D X$, where $D = \operatorname{diag}\left( \sigma'(Xw) \right)$. If $H$ is singular, it falls back to a plain gradient step.
+- Both methods add a momentum term to the update and stop when the relative change in $w$ is small enough.
 
 Outputs the learned weights, the confusion matrix, sensitivity, and specificity. `plot.py` draws the ground truth next to each method's predictions.
 
@@ -20,7 +20,7 @@ Clusters 60,000 binarized MNIST digits into 10 groups without labels, using a mi
 
 ### Approach
 
-- **E-step**: Computes each image's responsibility for each cluster from the per-pixel Bernoulli parameters and the mixing weights `λ`.
+- **E-step**: Computes each image's responsibility for each cluster from the per-pixel Bernoulli parameters and the mixing weights $\lambda$.
 - **M-step**: Re-estimates the Bernoulli parameters and mixing weights from those responsibilities.
 - **Restart on collapse**: If any mixing weight drops to zero, the parameters are randomly re-initialized.
 - **Label assignment**: After convergence, the program builds a count table of true digits against clusters. It then repeatedly matches the largest remaining (digit, cluster) pair, giving a one-to-one mapping.

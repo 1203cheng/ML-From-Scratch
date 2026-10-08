@@ -6,8 +6,8 @@ Face recognition on the Yale Face Database with PCA, LDA, and their kernel versi
 
 Faces from 15 subjects are resized (the `SIZE` constant, 50×50 by default; the figures below come from a 100×100 run), and each method keeps 25 components.
 
-- **PCA (eigenfaces)**: Takes the top eigenvectors of the data covariance. There are far fewer images than pixels, so it decomposes the small `n × n` matrix `XXᵀ` and maps the eigenvectors back to pixel space.
-- **LDA (fisherfaces)**: Takes the top eigenvectors of `S_w⁺ S_b` (the pseudo-inverse of the within-class scatter times the between-class scatter).
+- **PCA (eigenfaces)**: Takes the top eigenvectors of the data covariance. There are far fewer images than pixels, so it decomposes the small $n \times n$ matrix $XX^\top$ and maps the eigenvectors back to pixel space.
+- **LDA (fisherfaces)**: Takes the top eigenvectors of $S_w^{+} S_b$ (the pseudo-inverse of the within-class scatter times the between-class scatter).
 
 | Eigenfaces | Fisherfaces |
 |:---:|:---:|
@@ -21,10 +21,10 @@ Reconstruction from the 25 components (left: original, right: reconstructed):
 
 ## Part 2: Face Recognition with Kernel PCA / LDA
 
-Test faces are projected into each subspace and classified with k-NN (k = 3, 5, 7). Two kernels are supported:
+Test faces are projected into each subspace and classified with k-NN ($k = 3, 5, 7$). Two kernels are supported:
 
-- **Linear** kernel `XYᵀ`
-- **RBF** kernel `exp(−γ‖x − y‖²)`
+- **Linear** kernel $XY^\top$
+- **RBF** kernel $\exp\left( -\gamma \lVert x - y \rVert^2 \right)$
 
 For kernel PCA, the Gram matrix is centered in feature space. For kernel LDA, the scatter matrices are built in kernel space.
 
@@ -32,7 +32,7 @@ For kernel PCA, the Gram matrix is centered in feature space. For kernel LDA, th
 
 k-NN accuracy on the 30-image test set, at two input resolutions:
 
-| Method | 100×100, k=3 | k=5 | k=7 | 65×77, k=3 | k=5 | k=7 |
+| Method | 100×100, $k=3$ | $k=5$ | $k=7$ | 65×77, $k=3$ | $k=5$ | $k=7$ |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|
 | PCA | 0.83 | **0.90** | **0.90** | 0.83 | **0.90** | **0.90** |
 | LDA | 0.87 | 0.83 | 0.83 | 0.87 | 0.83 | 0.83 |

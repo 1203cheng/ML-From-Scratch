@@ -5,21 +5,29 @@ Online estimation and Bayesian linear regression, built on a hand-written C++ `M
 ## Data Generators
 
 - **Univariate Gaussian**: Uses the Marsaglia polar method (a variant of Box–Muller) to turn uniform samples into Gaussian ones.
-- **Polynomial basis linear model**: Draws `y = Σ wᵢxⁱ + ε` with `x ~ U(−1, 1)` and `ε ~ N(0, a)`.
+- **Polynomial basis linear model**: Draws $y = \sum_i w_i x^i + \varepsilon$ with $x \sim U(-1, 1)$ and $\varepsilon \sim \mathcal{N}(0, a)$.
 
 ## Part 1: Sequential Estimator
 
-Draws data from `N(μ, σ²)` one point at a time and updates the running mean and variance with **Welford's algorithm**. It stops once both estimates have converged.
+Draws data from $\mathcal{N}(\mu, \sigma^2)$ one point at a time and updates the running mean and variance with **Welford's algorithm**. It stops once both estimates have converged.
 
 ## Part 2: Bayesian Linear Regression
 
 Learns the weights of a polynomial model online, one data point at a time.
 
-- **Prior**: `w ~ N(0, b⁻¹I)`
-- **Posterior update** for each new point `(x, y)` with design vector `φ(x)`:
-  - `Λₙ = a⁻¹ φφᵀ + Λₙ₋₁`
-  - `μₙ = Λₙ⁻¹ (a⁻¹ φ y + Λₙ₋₁ μₙ₋₁)`
-- **Predictive distribution**: `N(φᵀμ, a + φᵀΛ⁻¹φ)`
+**Prior:**
+
+$$w \sim \mathcal{N}(0,\ b^{-1} I)$$
+
+**Posterior update** for each new point $(x, y)$ with design vector $\phi = \phi(x)$:
+
+$$\Lambda_n = a^{-1} \phi \phi^\top + \Lambda_{n-1}$$
+
+$$\mu_n = \Lambda_n^{-1} \left( a^{-1} \phi\, y + \Lambda_{n-1} \mu_{n-1} \right)$$
+
+**Predictive distribution:**
+
+$$\mathcal{N}\left( \phi^\top \mu,\ a + \phi^\top \Lambda^{-1} \phi \right)$$
 
 The run stops once the predictive variance stabilizes. Snapshots of the posterior after 10 and 50 points and at the end are written to `result.csv`.
 

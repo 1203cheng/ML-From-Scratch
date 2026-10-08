@@ -6,18 +6,27 @@ Gaussian Process regression with marginal-likelihood hyperparameter tuning, and 
 
 ### Approach
 
-- **Kernel**: Rational quadratic, `k(xᵢ, xⱼ) = (1 + ‖xᵢ − xⱼ‖² / (2αl²))^(−α)`
-- **Noise**: `C = K + β⁻¹I` with `β = 5`
-- **Prediction** at 300 test points in `[−60, 60]`:
-  - `μ(x*) = k(X, x*)ᵀ C⁻¹ y`
-  - `σ²(x*) = k(x*, x*) + β⁻¹ − k(X, x*)ᵀ C⁻¹ k(X, x*)`
-- **Hyperparameter optimization**: Minimizes the negative log marginal likelihood `½(ln|C| + yᵀC⁻¹y + N ln 2π)` over `(α, l)`, using `scipy.optimize.minimize`.
+**Kernel** — rational quadratic:
+
+$$k(x_i, x_j) = \left( 1 + \frac{\lVert x_i - x_j \rVert^2}{2 \alpha l^2} \right)^{-\alpha}$$
+
+**Noise** — the covariance of the training targets is $C = K + \beta^{-1} I$, with $\beta = 5$.
+
+**Prediction** at 300 test points $x_{\ast}$ in $[-60, 60]$:
+
+$$\mu(x_{\ast}) = k(X, x_{\ast})^\top C^{-1} y$$
+
+$$\sigma^2(x_{\ast}) = k(x_{\ast}, x_{\ast}) + \beta^{-1} - k(X, x_{\ast})^\top C^{-1} k(X, x_{\ast})$$
+
+**Hyperparameter optimization** — minimizes the negative log marginal likelihood over $(\alpha, l)$, using `scipy.optimize.minimize`:
+
+$$-\ln p(y \mid \alpha, l) = \frac{1}{2} \left( \ln \lvert C \rvert + y^\top C^{-1} y + N \ln 2\pi \right)$$
 
 The kernel, the posterior, and the likelihood are all written by hand in NumPy. SciPy is used only as the optimizer.
 
 ### Results
 
-| Initial `α = l = 1` | Optimized `α, l` |
+| Initial $\alpha = l = 1$ | Optimized $\alpha, l$ |
 |:---:|:---:|
 | ![GP default](docs/gp_default.png) | ![GP optimized](docs/gp_optimized.png) |
 
@@ -30,7 +39,7 @@ With the default hyperparameters, the model overfits: the mean chases every trai
 Uses [libsvm](https://github.com/cjlin1/libsvm) on MNIST images of 784 features each, read from CSV.
 
 - **Mode 1**: Compares linear, polynomial, and RBF kernels at libsvm defaults.
-- **Mode 2**: Grid-searches `C`, `γ`, degree, and `coef0` for each kernel with 3-fold cross-validation, then retrains the best model and tests it.
+- **Mode 2**: Grid-searches $C$, $\gamma$, degree, and `coef0` for each kernel with 3-fold cross-validation, then retrains the best model and tests it.
 - **Mode 3**: Builds a custom **linear + RBF** kernel by hand, then passes the precomputed Gram matrix to libsvm (`-t 4`).
 
 ### Observations

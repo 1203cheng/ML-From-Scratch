@@ -20,7 +20,7 @@ After testing, the program prints each class's "imagination": a 28×28 binary im
 
 ## Part 2: Beta-Binomial Conjugation
 
-Online Bayesian learning of a coin's bias. Each line of `testfile.txt` is a sequence of 0/1 outcomes. After reading each line, the program prints the binomial likelihood and updates the Beta prior `(a, b)` into the posterior `(a + m, b + N − m)`. That posterior then serves as the prior for the next line.
+Online Bayesian learning of a coin's bias. Each line of `testfile.txt` is a sequence of 0/1 outcomes. After reading each line, the program prints the binomial likelihood and updates the Beta prior $(a, b)$ into the posterior $(a + m,\ b + N - m)$. That posterior then serves as the prior for the next line.
 
 ### Files
 

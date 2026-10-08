@@ -6,9 +6,9 @@ Image segmentation of two 100×100 images using kernel K-means and spectral clus
 
 ### Kernel K-Means
 
-- **Similarity**: A kernel combining spatial and color RBFs, computed per pixel pair:
+The similarity between two pixels combines an RBF kernel on their spatial coordinates $s(x)$ and one on their colors $c(x)$:
 
-  `k(x, x′) = exp(−γₛ‖s(x) − s(x′)‖²) · exp(−γ_c‖c(x) − c(x′)‖²)`
+$$k(x, x') = \exp\left( -\gamma_s \lVert s(x) - s(x') \rVert^2 \right) \cdot \exp\left( -\gamma_c \lVert c(x) - c(x') \rVert^2 \right)$$
 
 - **Initialization**: Either random, or **kmeans++**, which picks each new centroid with probability based on how far it is from the existing ones in kernel space.
 - **Iteration**: Distances to each cluster are computed entirely from the Gram matrix, and points are reassigned until only a few labels change per iteration.
@@ -16,18 +16,18 @@ Image segmentation of two 100×100 images using kernel K-means and spectral clus
 
 ### Spectral Clustering
 
-Builds a similarity graph `W` from the same kernel, then uses one of two Laplacians:
+Builds a similarity graph $W$ from the same kernel, then uses one of two Laplacians:
 
-1. **Ratio cut**: `L = D − W`
-2. **Normalized cut**: `L_sym = I − D^(−1/2) W D^(−1/2)`, with the rows of the eigenvector matrix normalized to unit length afterward.
+1. **Ratio cut**: $L = D - W$
+2. **Normalized cut**: $L_{\text{sym}} = I - D^{-1/2} W D^{-1/2}$, with the rows of the eigenvector matrix normalized to unit length afterward.
 
-The program takes the `k` eigenvectors with the smallest eigenvalues, skipping the trivial one. It then runs kernel K-means on the points in that eigenspace. The eigendecomposition of the 10,000×10,000 Laplacian is the bottleneck. It runs on CuPy if a GPU is present and on NumPy otherwise.
+The program takes the $k$ eigenvectors with the smallest eigenvalues, skipping the trivial one. It then runs kernel K-means on the points in that eigenspace. The eigendecomposition of the 10,000×10,000 Laplacian is the bottleneck. It runs on CuPy if a GPU is present and on NumPy otherwise.
 
 ## Results
 
 ### Kernel K-means
 
-`image1.png` with 2 to 5 clusters (random initialization, `γₛ = 10⁻³`, `γ_c = 10⁻⁴`):
+`image1.png` with 2 to 5 clusters (random initialization, $\gamma_s = 10^{-3}$, $\gamma_c = 10^{-4}$):
 
 ![Kernel K-means, 2–5 clusters](docs/kkm_image1_2to5_clusters.jpg)
 
