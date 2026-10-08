@@ -15,9 +15,9 @@ HW1–HW4 use **no ML libraries** — all linear algebra, optimization, and prob
 
 ## Selected Results
 
-| Kernel K-means segmentation | t-SNE embedding | Eigenfaces | Gaussian process regression |
+| [Kernel K-means segmentation](spectral-clustering/README.md#kernel-k-means-1) | [t-SNE embedding](kernel-eigenfaces/README.md#part-3-t-sne-vs-symmetric-sne) | [Eigenfaces](kernel-eigenfaces/README.md#part-1-eigenfaces--fisherfaces) | [Gaussian process regression](gaussian-process-and-svm/README.md#results) |
 |:---:|:---:|:---:|:---:|
-| <a href="spectral-clustering/"><img src="spectral-clustering/docs/kkm_image1_3clusters.gif" height="180"></a> | <a href="kernel-eigenfaces/"><img src="kernel-eigenfaces/docs/tsne_perplexity_30.gif" height="180"></a> | <a href="kernel-eigenfaces/"><img src="kernel-eigenfaces/docs/eigenfaces.png" height="180"></a> | <a href="gaussian-process-and-svm/"><img src="gaussian-process-and-svm/docs/gp_optimized.png" height="180"></a> |
+| <a href="spectral-clustering/README.md#kernel-k-means-1"><img src="spectral-clustering/docs/kkm_image1_3clusters.gif" height="180"></a> | <a href="kernel-eigenfaces/README.md#part-3-t-sne-vs-symmetric-sne"><img src="kernel-eigenfaces/docs/tsne_perplexity_30.gif" height="180"></a> | <a href="kernel-eigenfaces/README.md#part-1-eigenfaces--fisherfaces"><img src="kernel-eigenfaces/docs/eigenfaces.png" height="180"></a> | <a href="gaussian-process-and-svm/README.md#results"><img src="gaussian-process-and-svm/docs/gp_optimized.png" height="180"></a> |
 
 ## Projects
 
