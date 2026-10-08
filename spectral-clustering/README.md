@@ -34,25 +34,38 @@ The program takes the $k$ eigenvectors with the smallest eigenvalues, skipping t
 - 3 to 4 clusters describe this image best.
 - Random initialization and kmeans++ usually converge to similar segmentations; kmeans++ is sometimes slightly better.
 
+Iterations of kernel K-means (the first frame shows the final result):
+
+| Input | Kernel K-means |
+|:---:|:---:|
+| <img src="image1.png" width="308"> | ![](docs/kkm_image1_3clusters.gif) |
+| `image1.png` | 3 clusters, kmeans++, $\gamma_s = \gamma_c = 10^{-4}$ |
+| <img src="image2.png" width="308"> | ![](docs/kkm_image2_4clusters.gif) |
+| `image2.png` | 4 clusters, kmeans++, $\gamma_s = \gamma_c = 10^{-3}$ |
+
 ### Spectral Clustering
 
 Normalized cut (left) vs. ratio cut (right) on `image1.png`. The normalized cut picks up finer detail.
 
 ![Normalized cut vs. ratio cut](docs/normalized_vs_ratiocut.jpg)
 
-Spectral clustering on `image1.png` (each GIF shows the iterations):
+Iterations of K-means in the eigenspace (the first frame shows the final result). Because the eigenvectors already separate the pixels well, it converges in far fewer iterations than kernel K-means on the raw pixels.
 
-| 2 clusters | 3 clusters | 4 clusters |
+`image1.png`:
+
+| Input | 3 clusters | 4 clusters |
 |:---:|:---:|:---:|
-| ![](docs/image1_2clusters.gif) | ![](docs/image1_3clusters.gif) | ![](docs/image1_4clusters.gif) |
+| <img src="image1.png" width="280"> | <img src="docs/spectral_image1_3clusters.gif" width="280"> | <img src="docs/spectral_image1_4clusters.gif" width="280"> |
+| | kmeans++, $\gamma_s = \gamma_c = 10^{-3}$ | random, $\gamma_s = \gamma_c = 10^{-4}$ |
 
-Spectral clustering on `image2.png`:
+`image2.png`:
 
-| 2 clusters | 3 clusters |
-|:---:|:---:|
-| ![](docs/image2_2clusters.gif) | ![](docs/image2_3clusters.gif) |
+| Input | 2 clusters | 3 clusters | 4 clusters |
+|:---:|:---:|:---:|:---:|
+| <img src="image2.png" width="210"> | <img src="docs/spectral_image2_2clusters.gif" width="210"> | <img src="docs/spectral_image2_3clusters.gif" width="210"> | <img src="docs/spectral_image2_4clusters.gif" width="210"> |
+| | random, $\gamma_s = \gamma_c = 10^{-4}$ | kmeans++, $\gamma_s = \gamma_c = 10^{-4}$ | kmeans++, $\gamma_s = \gamma_c = 10^{-4}$ |
 
-Data points in the eigenspace, colored by cluster:
+Data points of `image1.png` in the eigenspace, colored by cluster:
 
 | 2 clusters | 3 clusters |
 |:---:|:---:|

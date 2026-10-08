@@ -13,6 +13,12 @@ HW1–HW4 use **no ML libraries** — all linear algebra, optimization, and prob
 | **Instructors** | Prof. Jui-Hung Hung, Prof. Walon Chiu |
 | **Semester** | 2024 Spring |
 
+## Highlights
+
+| Kernel K-means segmentation | t-SNE embedding | Eigenfaces | Gaussian process regression |
+|:---:|:---:|:---:|:---:|
+| <a href="spectral-clustering/"><img src="spectral-clustering/docs/kkm_image2_4clusters.gif" height="180"></a> | <a href="kernel-eigenfaces/"><img src="kernel-eigenfaces/docs/tsne_perplexity_30.gif" height="180"></a> | <a href="kernel-eigenfaces/"><img src="kernel-eigenfaces/docs/eigenfaces.png" height="180"></a> | <a href="gaussian-process-and-svm/"><img src="gaussian-process-and-svm/docs/gp_optimized.png" height="180"></a> |
+
 ## Projects
 
 | Directory | Topic | Language | Key Algorithms |
